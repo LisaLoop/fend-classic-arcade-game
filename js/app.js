@@ -2,7 +2,8 @@
 var Enemy = function() {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
-
+    var enemyBug1 = new Enemy;
+    var enemyBug2 = new Enemy;
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
@@ -46,8 +47,8 @@ Player.prototype.handleInput = function() {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-var allEnemies = [
-    enemyBug = new Enemy
+var allEnemies = [ enemyBug1, enemyBug2
+    
 ];
 var player = new Player;
 
