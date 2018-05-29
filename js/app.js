@@ -56,19 +56,24 @@ Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 
 };
-
-Player.prototype.handleInput = function() {
-     switch(e.keycode) {
-            case 37:
+//handleInput method recieves the event detected by listener
+Player.prototype.handleInput = function(e) {
+     switch(e) {
+            case "up":
                 console.log("37");
+                this.y -= 50;
                 break;
-            case 38:
+            case "down":
                 console.log("38");
+                 this.y += 50;
                 break;
-            case 39:
+
+            case "left":
                 console.log("39");
+                this.x -= 50;
                 break;  
-            case 40:
+            case "right":
+                this.x += 50;
                 console.log("40");
                 break;
 
