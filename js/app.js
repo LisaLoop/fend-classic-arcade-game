@@ -56,30 +56,31 @@ Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 
 };
-//handleInput method recieves the event detected by listener
+//handleInput method recieves the event (e) detected by listener
 Player.prototype.handleInput = function(e) {
      switch(e) {
             case "up":
-                console.log("37");
                 this.y -= 50;
                 break;
             case "down":
-                console.log("38");
                  this.y += 50;
                 break;
-
             case "left":
-                console.log("39");
                 this.x -= 50;
                 break;  
             case "right":
                 this.x += 50;
-                console.log("40");
                 break;
-
             default:
                 return; // do nothing
         }
+    if (this.x > 500 || this.x < 0) {
+        this.x = 200;
+    }
+
+    if (this.y > 500 || this.y < 0) {
+        this.y = 400;
+    }
      
 };
 
