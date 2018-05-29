@@ -11,14 +11,11 @@ var Enemy = function() {
 
     this.x = 0; //x axis starting point is the same 
     this.y = Math.floor(Math.random() * 250);
-    this.speed = Math.floor(Math.random() * 200);
-    
-
-   
+    this.speed = Math.floor(Math.random() * 200); 
 
 };
 
-console.log(typeof Enemy);
+// console.log(typeof Enemy);
 
 
 // Update the enemy's position, required method for game
@@ -61,19 +58,34 @@ Player.prototype.render = function() {
 };
 
 Player.prototype.handleInput = function() {
+     switch(e.keycode) {
+            case 37:
+                console.log("37");
+                break;
+            case 38:
+                console.log("38");
+                break;
+            case 39:
+                console.log("39");
+                break;  
+            case 40:
+                console.log("40");
+                break;
 
+            default:
+                return; // do nothing
+        }
+     
 };
-
 
 // Now instantiate your objects.
 var enemyBug1 = new Enemy; 
-console.log(enemyBug1);
 var enemyBug2 = new Enemy;
 var enemyBug3 = new Enemy;
 
  
 // Place all enemy objects in an array called allEnemies
-var allEnemies = [ enemyBug1, enemyBug2, enemyBug3];
+var allEnemies = [enemyBug1, enemyBug2, enemyBug3];
 
 // Place the player object in a variable called player
 var player = new Player;
@@ -90,6 +102,8 @@ document.addEventListener('keyup', function(e) {
         40: 'down'
     };
     player.handleInput(allowedKeys[e.keyCode]);
+    // console.log(allowedKeys[e.keyCode]);
+
 });
 
 
