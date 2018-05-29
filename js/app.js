@@ -1,3 +1,5 @@
+'use strict';
+
 // Enemies our player must avoid
 var Enemy = function() {
     // Variables applied to each of our instances go here,
@@ -6,12 +8,18 @@ var Enemy = function() {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
-    // this.x = Math.floor(Math.random() * 300);
+
     this.x = 0; //x axis starting point is the same 
     this.y = Math.floor(Math.random() * 250);
     this.speed = Math.floor(Math.random() * 200);
-    console.log(this.x, this.y, this.speed);
+    
+
+   
+
 };
+
+console.log(typeof Enemy);
+
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
@@ -21,6 +29,9 @@ Enemy.prototype.update = function(dt) {
     // all computers.
     this.x += this.speed * dt;
     // this.speed = 50.0;
+     if(this.x > 505) {
+        this.x = 0;
+    }
 };
 
 // Draw the enemy on the screen, required method for game
@@ -46,6 +57,7 @@ Player.prototype.update = function(dt) {
 
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+
 };
 
 Player.prototype.handleInput = function() {
@@ -54,16 +66,18 @@ Player.prototype.handleInput = function() {
 
 
 // Now instantiate your objects.
-var enemyBug1 = new Enemy;
-   
+var enemyBug1 = new Enemy; 
+console.log(enemyBug1);
 var enemyBug2 = new Enemy;
+var enemyBug3 = new Enemy;
 
  
 // Place all enemy objects in an array called allEnemies
-var allEnemies = [ enemyBug1, enemyBug2];
+var allEnemies = [ enemyBug1, enemyBug2, enemyBug3];
 
 // Place the player object in a variable called player
 var player = new Player;
+console.log(player);
     
 
 // This listens for key presses and sends the keys to your
