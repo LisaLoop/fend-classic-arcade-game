@@ -10,9 +10,9 @@ var Enemy = function() {
     this.x = 0; //x axis starting point is the same 
     this.y = Math.floor(Math.random() * 250);
     this.speed = Math.floor(Math.random() * 200);
-    this.width = 101;
-    this.height = 171;
-    return this 
+    // this.width = 101;
+    // this.height = 171;
+    // return this 
 };
 
 
@@ -51,49 +51,13 @@ Player.prototype.update = function(dt) {
 };
 
 Player.prototype.handleCollision = function() {
-   
-// get x1, y1,(top left) x2, y2 (bottom right)
-// for each enemy 
-// pointInRect();
-    // the player collides with enemy
-    //game resets
-    
+    // Player.bind(Enemy);
+    if((this.y === Enemy.y) && (this.x = Enemy.x )){
+        //send player to the start position
+        console.log("hit dectected!");
+    }      
 }
-// var enemy = {"x":5,"y":5,"width":50,"height":50};
 
-// function rectangleInsideRectangle(rectangles){
-// check if any corners are inside the rectangle
-//}
-function pointInRect(point, rect){
-    var x = point.x;
-    var y = point.y;
-  
-    var x1 = rect.x;
-    var y1 = rect.y;
-    var x2 = rect.x + rect.width;
-    var y2 = rect.y + rect.height;
-    console.log(x1 < x && x < x2 && y1 < y && y < y2);
-    if (x1 < x && x < x2 && y1 < y && y < y2){
-        console.log('collision detected!');
-    }
-    
-    return x1 < x && x < x2 && y1 < y && y < y2 ;
-
-  }
-
-function rectOverlap(rect1,rect2){
-    var c1 = {"x": rect1.x,               "y": rect1.y};      // top left
-    var c2 = {"x": rect1.x + rect1.width, "y": rect1.y};      // top right
-    var c3 = {"x": rect1.x ,              "y": rect1.y + rect1.height}; // bottom left
-    var c4 = {"x": rect1.x + rect1.width, "y": rect1.y + rect1.height}; // bottom right
-  
-    return (pointInRect(c1, rect2) ||
-    pointInRect(c2, rect2) ||
-    pointInRect(c3, rect2) ||
-    pointInRect(c4, rect2));
-  
-  }
-//   console.log(rectOverlap(enemy,player));
 
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
@@ -155,48 +119,6 @@ document.addEventListener('keyup', function(e) {
     };
     player.handleInput(allowedKeys[e.keyCode]);
 });
-
-/*
-
-x,y
-
-    x1=5,y1=5
-    +-----------+
-    |           |
-    |  x=10,y=20|      x=55,y=20
-    |           |
-    +-----------+ x2=50,y2=50
-
-    5 < 10 < 50  =>  inside x coord
-    5 < 20 < 50  =>  inside y coord
-
-
-        c1
-        +---------------------+ c2
-        |                     |
-        |                     |
-        |                     |
-        |        +------------+--------+
-        |        |            |        |
-        +--------+------------+ c4     |
-        c3       |                     |
-                 |                     |
-                 +---------------------+ <-rect2
-
-        if c4 inside to rect2
-        or
-        if c3 inside to rect2
-        or
-        if c2 inside to rect2
-        or
-        if c1 inside to rect2
-
-
-
-    inside x coord, and inside y coord, => point is inside rect.
-
-
-*/
 
 
 
