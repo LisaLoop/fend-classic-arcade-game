@@ -10,9 +10,9 @@ var Enemy = function() {
     this.x = 0; //x axis starting point is the same 
     this.y = Math.floor(Math.random() * 250);
     this.speed = Math.floor(Math.random() * 200);
-    // this.width = 101;
-    // this.height = 171;
-    // return this 
+    this.width = 101;
+    this.height = 171;
+    return this 
 };
 
 
@@ -48,14 +48,62 @@ Player.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+    // console.log("function called");
+    
 };
 
-Player.prototype.handleCollision = function() {
-    // Player.bind(Enemy);
-    if((this.y === Enemy.y) && (this.x = Enemy.x )){
-        //send player to the start position
-        console.log("hit dectected!");
-    }      
+Player.prototype.handleCollision = function(enemy) {
+   
+    
+    // var point = {"x":55,"y":20};
+    // var enemy = {"x":5,"y":5,"width":50,"height":50};
+    // var player = {"x":1,"y":1,"width":20,"height":20};
+
+
+    function pointInRect(point, rect){
+        var x = point.x;
+        var y = point.y;
+      
+        var x1 = rect.x;
+        var y1 = rect.y;
+        var x2 = rect.x + rect.width;
+        var y2 = rect.y + rect.height;
+      
+        return x1 < x && x < x2 && y1 < y && y < y2 ;
+      
+      }
+      
+      console.log(pointInRect(point, enemy));
+      
+      function rectOverlap(rect1,rect2){
+        var c1 = {"x": rect1.x,               "y": rect1.y};      // top left
+        var c2 = {"x": rect1.x + rect1.width, "y": rect1.y};      // top right
+        var c3 = {"x": rect1.x ,              "y": rect1.y + rect1.height}; // bottom left
+        var c4 = {"x": rect1.x + rect1.width, "y": rect1.y + rect1.height}; // bottom right
+      
+        return (pointInRect(c1, rect2) ||
+        pointInRect(c2, rect2) ||
+        pointInRect(c3, rect2) ||
+        pointInRect(c4, rect2));
+      
+      }
+      console.log(rectOverlap(enemy,player));
+
+      //
+    //   player.bind("EnterFrame", function () {
+    //     if (rect1.x < rect2.x + rect2.width &&
+    //         rect1.x + rect1.width > rect2.x &&
+    //         rect1.y < rect2.y + rect2.height &&
+    //         rect1.height + rect1.y > rect2.y) {
+    //         // collision detected!
+    //         console.log("hit")
+    //     } else {
+    //         // no collision
+    //         this.color("miss"); 
+    //     }
+    //     //
+    // });
+      
 }
 
 
@@ -101,10 +149,8 @@ var enemyBug3 = new Enemy();
  
 // Place all enemy objects in an array called allEnemies
 var allEnemies = [enemyBug1, enemyBug2, enemyBug3];
-
-// Place the player object in a variable called player
 var player = new Player();
-player.handleCollision();
+
 
     
 
