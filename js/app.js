@@ -23,6 +23,9 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+    if (pause) {
+        return
+    }
     this.x += this.speed * dt;
      if(this.x > 505) {
         this.x = 0;
@@ -56,8 +59,6 @@ Player.prototype.update = function(dt) {
         player.handleCollision(allEnemies[i]);
         console.log(allEnemies[i].name);
     }
-
-
     
 };
 
@@ -149,6 +150,10 @@ var enemyBug3 = new Enemy("E3");
 // Place all enemy objects in an array called allEnemies
 var allEnemies = [enemyBug1, enemyBug2, enemyBug3];
 var player = new Player();
+
+
+//
+let pause = 0;
 
 
     

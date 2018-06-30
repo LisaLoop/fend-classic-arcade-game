@@ -1,0 +1,7 @@
+1. Change the sprite image content so there is no extra space, img tightly represent shape of sprites.
+2. Fix the bug that only 1 enemy bug is being collided 
+3. comment code from today
+4. map letter P to pause 
+5. implement damage - if there is collision the player takes damage. HP points. HP goes down my 1 point 
+    on each hit, if damage goes down to zero game will restart itself. 
+6. download Crossy Road -- come up with plan
