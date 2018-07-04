@@ -97,7 +97,6 @@ Player.prototype.handleCollision = function(enemy) {
       }
       
       // console.log(rectOverlap(enemy,player));
-      //console.log(enemy.name);
       let isTakingDamage = rectOverlap(player, enemy);    
       if (isTakingDamage){
           console.log(enemy.name);
@@ -107,6 +106,7 @@ Player.prototype.handleCollision = function(enemy) {
           
       } else {
           player.sprite = 'images/char-cat-girl.png';
+          player.damaged = false;
       }
 }
 
