@@ -1,17 +1,17 @@
 'use strict';
 
 // Enemies our player must avoid
-var Enemy = function(name) {
+var Enemy = function(x, y, speed, name) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
-    this.x = 0; //x axis starting point is the same 
-    this.y = Math.floor(Math.random() * 250);
-    this.speed = Math.floor(Math.random() * 200);
-    this.width = 101;
-    this.height = 171;
+    this.x = x;
+    this.y = y;
+    this.width = 99;
+    this.height = 77;
+    this.speed = speed;
     this.name = name;
     return this 
 };
@@ -20,12 +20,12 @@ var Enemy = function(name) {
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
     if (pause) {
         return
     }
+    // You should multiply any movement by the dt parameter
+    // which will ensure the game runs at the same speed for
+    // all computers.
     this.x += this.speed * dt;
      if(this.x > 505) {
         this.x = 0;
@@ -46,8 +46,9 @@ var Player = function() {
     this.sprite = 'images/char-cat-girl.png';
     this.x = 200;
     this.y = 400;
-    this.width = 101;
-    this.height = 171;
+    this.width = 70;
+    this.height = 94;
+    this.damaged = false;
 }
 
 Player.prototype.update = function(dt) {
@@ -57,7 +58,11 @@ Player.prototype.update = function(dt) {
     // console.log("function called");
     for(let i = 0; i < allEnemies.length; i += 1) {
         player.handleCollision(allEnemies[i]);
-        console.log(allEnemies[i].name);
+        //console.log(allEnemies[i].name);
+        if (player.damaged) {
+            return;
+        }
+            
     }
     
 };
@@ -78,9 +83,6 @@ Player.prototype.handleCollision = function(enemy) {
       
       }
     // console.log("false?: ", pointInRect(point, enemy));
-
-      
-      
       function rectOverlap(rect1,rect2){
 
         var c1 = {"x": rect1.x,               "y": rect1.y};      // top left
@@ -92,13 +94,17 @@ Player.prototype.handleCollision = function(enemy) {
         pointInRect(c2, rect2) ||
         pointInRect(c3, rect2) ||
         pointInRect(c4, rect2));
-      
       }
-    //   console.log(rectOverlap(enemy,player));
+      
+      // console.log(rectOverlap(enemy,player));
+      //console.log(enemy.name);
       let isTakingDamage = rectOverlap(player, enemy);    
       if (isTakingDamage){
-        //   console.log(enemy.name);
+          console.log(enemy.name);
           player.sprite = 'images/char-cat-girl-damage.png';
+          player.damaged = true;
+          //debugger;
+          
       } else {
           player.sprite = 'images/char-cat-girl.png';
       }
@@ -141,16 +147,16 @@ Player.prototype.handleInput = function(e) {
      
 };
 
-// Now instantiate your objects.
-var enemyBug1 = new Enemy("E1"); 
-var enemyBug2 = new Enemy("E2");
-var enemyBug3 = new Enemy("E3");
+// Now instantiate your objects. 
+//arguments are x, y, speed, name
+var enemyBug1 = new Enemy(0, 150, 100, "E1"); 
+var enemyBug2 = new Enemy(0, 250, 150, "E2");
+var enemyBug3 = new Enemy(0, 305, 75, "E3");
 
  
 // Place all enemy objects in an array called allEnemies
 var allEnemies = [enemyBug1, enemyBug2, enemyBug3];
 var player = new Player();
-
 
 //
 let pause = 0;
