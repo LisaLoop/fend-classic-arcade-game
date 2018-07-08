@@ -162,6 +162,17 @@ var Engine = (function(global) {
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
+        // Now instantiate your objects. 
+        //arguments are x, y, speed, name
+        enemyBug1 = new Enemy(0, 150, 100, "E1"); 
+        enemyBug2 = new Enemy(0, 250, 150, "E2");
+        enemyBug3 = new Enemy(0, 305, 75, "E3");
+
+        
+        // Place all enemy objects in an array called allEnemies
+        allEnemies = [enemyBug1, enemyBug2, enemyBug3];
+        player = new Player(); // global var
+
         // noop
     }
 
@@ -185,4 +196,5 @@ var Engine = (function(global) {
      * from within their app.js files.
      */
     global.ctx = ctx;
+    global.reset = reset;
 })(this);

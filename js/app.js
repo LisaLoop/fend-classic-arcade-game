@@ -48,6 +48,7 @@ var Player = function() {
     this.y = 400;
     this.width = 70;
     this.height = 94;
+    this.health = 100;
     this.damaged = false;
 }
 
@@ -79,7 +80,7 @@ Player.prototype.handleCollision = function(enemy) {
         var x2 = rect.x + rect.width;
         var y2 = rect.y + rect.height;
         
-        return x1 < x && x < x2 && y1 < y && y < y2 ;
+        return x1 <= x && x <= x2 && y1 <= y && y <= y2 ;
       
       }
     // console.log("false?: ", pointInRect(point, enemy));
@@ -95,19 +96,25 @@ Player.prototype.handleCollision = function(enemy) {
         pointInRect(c3, rect2) ||
         pointInRect(c4, rect2));
       }
-      
-      // console.log(rectOverlap(enemy,player));
-      let isTakingDamage = rectOverlap(player, enemy);    
+      //if there is an overlap of player and enemy the player takes damage
+      let isTakingDamage = rectOverlap(player, enemy) || rectOverlap(enemy, player); 
       if (isTakingDamage){
-          console.log(enemy.name);
+        //   console.log(enemy.name);
           player.sprite = 'images/char-cat-girl-damage.png';
           player.damaged = true;
-          //debugger;
+          player.health -= 1;
+        //   console.log(player.health);
+          if (player.health < 0) {
+              console.log("game over");
+              reset();
+          }
+        //   debugger;
           
       } else {
           player.sprite = 'images/char-cat-girl.png';
           player.damaged = false;
       }
+      
 }
 
 
@@ -115,6 +122,25 @@ Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     ctx.strokeStyle = 'red';
     ctx.strokeRect(this.x, this.y, this.width ,this.height);
+
+    // ctx.restore();
+    ctx.font = '30px monospace';
+    ctx.fontStyle = "rgb(24, 24, 104)";
+    ctx.linewidth = 2;
+    ctx.fillStyle = "rgb(0, 0 ,0)";
+
+    // Draws player current lives, score and level while playeg game
+
+    let maximumHealth = 100;
+    ctx.fillText("Health: " + this.health, 20, 80);
+    let healthBarWidth = 400 * this.health/maximumHealth;
+    let g = Math.round(255 * this.health/maximumHealth); //green
+    let r = 255 - g; //red
+    let b = 54; //blue
+    let color =  "rgb("+ r +","+ g +"," + b + ")";
+    ctx.fillStyle = color;
+    ctx.fillRect(20, 20, healthBarWidth, 20);
+    ctx.save();
 
 };
 //handleInput method recieves the event (e) detected by listener
@@ -156,7 +182,7 @@ var enemyBug3 = new Enemy(0, 305, 75, "E3");
  
 // Place all enemy objects in an array called allEnemies
 var allEnemies = [enemyBug1, enemyBug2, enemyBug3];
-var player = new Player();
+var player = new Player(); // global var
 
 //
 let pause = 0;
