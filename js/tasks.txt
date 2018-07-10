@@ -1,12 +1,10 @@
-0. non discrete movement -- keypress should 
-1. comment code from today
-2. map letter P to pause 
-3. play and download Crossy Road -- why is it fun??
+
+TODO
+0. non discrete movement -- keypress should keep moving character
 4. read sidescroller code
 5. find 5 sidescroller games. which ones do i like the most and why.
     - 1942 for NES download NES emulator free openEMU, Fzero SNES
 6. write level editor 
-7. read about 2d matrices
 8. create a text representation for levels. should be able to represent the safe and dangerous areas and enemies. Want lava. ASCII. 
     draw level using ASCII editor. 
 9. lava
@@ -17,3 +15,9 @@
         12.2 sounds when player wins
         12.3 background music
 13. Victory condition detection. 
+
+DONE 
+1. comment code from today
+2. map letter P to pause 
+3. play and download Crossy Road -- why is it fun??
+7. read about 2d matrices

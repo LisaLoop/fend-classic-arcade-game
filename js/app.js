@@ -117,7 +117,6 @@ Player.prototype.handleCollision = function(enemy) {
       
 }
 
-
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     ctx.strokeStyle = 'red';
@@ -137,6 +136,7 @@ Player.prototype.render = function() {
     let g = Math.round(255 * this.health/maximumHealth); //green
     let r = 255 - g; //red
     let b = 54; //blue
+    //concatenates the variables to create rgb values
     let color =  "rgb("+ r +","+ g +"," + b + ")";
     ctx.fillStyle = color;
     ctx.fillRect(20, 20, healthBarWidth, 20);
@@ -157,6 +157,10 @@ Player.prototype.handleInput = function(e) {
                 break;  
             case "right":
                 this.x += 50;
+                break;
+            case "pause":
+                pause = !pause; //toggles between paused and resumed
+                // console.log( (pause ? "paused" : "resumed") );
                 break;
             default:
                 return; // do nothing
@@ -185,15 +189,14 @@ var allEnemies = [enemyBug1, enemyBug2, enemyBug3];
 var player = new Player(); // global var
 
 //
-let pause = 0;
+let pause = false; 
 
-
-    
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
+        32: 'pause', //spacebar
         37: 'left',
         38: 'up',
         39: 'right',
