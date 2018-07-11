@@ -53,6 +53,10 @@ var Player = function() {
 }
 
 Player.prototype.update = function(dt) {
+    if (pause) {
+        this.isTakingDamage = false;
+        return
+    }
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
@@ -65,7 +69,6 @@ Player.prototype.update = function(dt) {
         }
             
     }
-    
 };
 
 Player.prototype.handleCollision = function(enemy) {
@@ -108,7 +111,6 @@ Player.prototype.handleCollision = function(enemy) {
               console.log("game over");
               reset();
           }
-        //   debugger;
           
       } else {
           player.sprite = 'images/char-cat-girl.png';
@@ -121,18 +123,15 @@ Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     ctx.strokeStyle = 'red';
     ctx.strokeRect(this.x, this.y, this.width ,this.height);
-
-    // ctx.restore();
     ctx.font = '30px monospace';
     ctx.fontStyle = "rgb(24, 24, 104)";
     ctx.linewidth = 2;
     ctx.fillStyle = "rgb(0, 0 ,0)";
 
-    // Draws player current lives, score and level while playeg game
-
-    let maximumHealth = 100;
-    ctx.fillText("Health: " + this.health, 20, 80);
-    let healthBarWidth = 400 * this.health/maximumHealth;
+    // Draws player current lives, score and level while play game
+    let maximumHealth = 100; //player starts with 100 health points
+    ctx.fillText("Health: " + this.health, 20, 80); // text written to screen
+    let healthBarWidth = 400 * this.health/maximumHealth; 
     let g = Math.round(255 * this.health/maximumHealth); //green
     let r = 255 - g; //red
     let b = 54; //blue
@@ -144,28 +143,38 @@ Player.prototype.render = function() {
 
 };
 //handleInput method recieves the event (e) detected by listener
-Player.prototype.handleInput = function(e) {
-     switch(e) {
-            case "up":
-                this.y -= 50;
-                break;
-            case "down":
-                 this.y += 50;
-                break;
-            case "left":
-                this.x -= 50;
-                break;  
-            case "right":
-                this.x += 50;
-                break;
-            case "pause":
-                pause = !pause; //toggles between paused and resumed
-                // console.log( (pause ? "paused" : "resumed") );
-                break;
-            default:
-                return; // do nothing
-        }
-
+Player.prototype.handleInput = function(e){
+ if (pause) {
+    switch(e){
+        case "pause":
+        pause = !pause;  //toggles between pause and resume
+        console.log( (pause ? "pause" : "resume") );               
+        break;
+    default:
+        return; // do nothing 
+    }
+ } else {
+    switch(e) {
+        case "up":
+            this.y -= 50;
+            break;
+        case "down":
+             this.y += 50;
+            break;
+        case "left":
+            this.x -= 50;
+            break;  
+        case "right":
+            this.x += 50;
+            break;
+        case "pause":
+            pause = !pause;  //toggles between pause and resume
+            console.log( (pause ? "pause" : "resume") );               
+            break;
+        default:
+            return; // do nothing
+    }
+ }
     //prevents character from moving outside of gameboard
     if (this.x > 500 || this.x < 0) {
         this.x = 200;
@@ -187,9 +196,8 @@ var enemyBug3 = new Enemy(0, 305, 75, "E3");
 // Place all enemy objects in an array called allEnemies
 var allEnemies = [enemyBug1, enemyBug2, enemyBug3];
 var player = new Player(); // global var
-
-//
-let pause = false; 
+// pause set to false on game start in reset in function
+let pause; 
 
 
 // This listens for key presses and sends the keys to your

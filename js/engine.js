@@ -172,9 +172,11 @@ var Engine = (function(global) {
         // Place all enemy objects in an array called allEnemies
         allEnemies = [enemyBug1, enemyBug2, enemyBug3];
         player = new Player(); // global var
+        pause = false;
 
         // noop
     }
+
 
     /* Go ahead and load all of the images we know we're going to need to
      * draw our game level. Then set init as the callback method, so that when
