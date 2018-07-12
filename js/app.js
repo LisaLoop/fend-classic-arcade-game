@@ -35,8 +35,8 @@ Enemy.prototype.update = function(dt) {
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-    ctx.strokeStyle = 'green';
-    ctx.strokeRect(this.x, this.y, this.width ,this.height);
+    // ctx.strokeStyle = 'green';
+    // ctx.strokeRect(this.x, this.y, this.width ,this.height);
 };
 
 // GEM 
@@ -154,8 +154,8 @@ Player.prototype.handleCollision = function(enemy) {
 
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-    ctx.strokeStyle = 'red';
-    ctx.strokeRect(this.x, this.y, this.width ,this.height);
+    // ctx.strokeStyle = 'red';
+    // ctx.strokeRect(this.x, this.y, this.width ,this.height);
     ctx.font = '30px monospace';
     ctx.fontStyle = "rgb(24, 24, 104)";
     ctx.linewidth = 2;
