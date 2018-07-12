@@ -179,7 +179,7 @@ Player.prototype.render = function() {
         ctx.fontStyle = "rgb(24, 24, 104)";
         ctx.fillStyle = "rgb(0, 0 ,0)";
         ctx.fillText("You won", 150, 150); // text written to screen
-        setTimeout( function(){reset();}, 1000);
+        setTimeout( function(){reset();}, 2500);
     }
 
 };
