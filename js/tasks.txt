@@ -2,8 +2,6 @@
 TODO
 0. non discrete movement -- keypress should keep moving character
 4. read sidescroller code
-5. find 5 sidescroller games. which ones do i like the most and why.
-    - 1942 for NES download NES emulator free openEMU, Fzero SNES
 6. write level editor 
 8. create a text representation for levels. should be able to represent the safe and dangerous areas and enemies. Want lava. ASCII. 
     draw level using ASCII editor. 
@@ -11,7 +9,11 @@ TODO
 10. collision against walls, obstacles, dangerous areas. rendering of the background should come from engine
 11. Gems - display amount of Gems
 
-13. Victory condition detection. 
+IN PROGRESS 
+5. find 5 sidescroller games. which ones do i like the most and why.
+    - 1942 for NES download NES emulator free openEMU, Fzero SNES
+
+
 
 DONE 
 1. comment code from today
@@ -24,3 +26,4 @@ DONE
         12.1 sound for when player is hit -- https://freesound.org/people/LittleRobotSoundFactory/sounds/270326/
         12.2 sounds when player wins -- https://freesound.org/people/xtrgamr/sounds/277441/
         12.3 background music -- https://freesound.org/people/Sirkoto51/sounds/370175/
+13. Victory condition detection. 

@@ -39,6 +39,38 @@ Enemy.prototype.render = function() {
     ctx.strokeRect(this.x, this.y, this.width ,this.height);
 };
 
+// GEM 
+// var Gem = function(x, y, name) {
+//     this.sprite = 'images/gem-blue.png',
+//     this.x = x,
+//     this.y = y,
+//     this.name = name,
+//     this.width = 90,
+//     this.height = 77
+// }
+// Gem.prototype.render = function() {
+//     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+//     // ctx.strokeStyle = 'purple';
+//     // ctx.strokeRect(this.x, this.y, this.width ,this.height);
+// };
+
+// Gem.prototype.update = function() {
+//     this.checkCollision();
+// }
+
+// Gem.prototype.checkCollision = function() {
+//     var gem = {x: this.x, y: this.y};
+//     // var player = {x: player.x, y: player.y};
+//     // console.log("player is ", player);
+
+//     if (gem.x < player.x + player.width &&
+//         gem.x + gem.width > player.x &&
+//         gem.y < player.y + player.height &&
+//         gem.height + gem.y > player.y) {
+//             // this.collisionDetected();
+//         console.log("collision detected");
+//     }
+// };
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
@@ -49,6 +81,7 @@ var Player = function() {
     this.width = 70;
     this.height = 94;
     this.health = 100;
+    // this.points = 0;
     this.damaged = false;
 }
 
@@ -108,7 +141,7 @@ Player.prototype.handleCollision = function(enemy) {
           player.health -= 1;
         //   console.log(player.health);
           if (player.health < 0) {
-              console.log("game over");
+            //   console.log("game over");
               reset();
           }
           
@@ -127,7 +160,7 @@ Player.prototype.render = function() {
     ctx.fontStyle = "rgb(24, 24, 104)";
     ctx.linewidth = 2;
     ctx.fillStyle = "rgb(0, 0 ,0)";
-
+    // ctx.fillText("Points: " + this.points, 300, 80); // text written to screen
     // Draws player current lives, score and level while play game
     let maximumHealth = 100; //player starts with 100 health points
     ctx.fillText("Health: " + this.health, 20, 80); // text written to screen
@@ -140,6 +173,14 @@ Player.prototype.render = function() {
     ctx.fillStyle = color;
     ctx.fillRect(20, 20, healthBarWidth, 20);
     ctx.save();
+     //detects victory condition
+     if (this.y === 50) {
+        ctx.font = '50px monospace';
+        ctx.fontStyle = "rgb(24, 24, 104)";
+        ctx.fillStyle = "rgb(0, 0 ,0)";
+        ctx.fillText("You won", 150, 150); // text written to screen
+        setTimeout( function(){reset();}, 1000);
+    }
 
 };
 //handleInput method recieves the event (e) detected by listener
@@ -183,6 +224,11 @@ Player.prototype.handleInput = function(e){
     if (this.y > 500 || this.y < 0) {
         this.y = 400;
     }
+
+    //detects victory condition
+    if (this.y === 50) {
+        console.log("you reached the water");
+    }
      
 };
 
@@ -196,6 +242,10 @@ var enemyBug3 = new Enemy(0, 305, 75, "E3");
 // Place all enemy objects in an array called allEnemies
 var allEnemies = [enemyBug1, enemyBug2, enemyBug3];
 var player = new Player(); // global var
+
+// var blueGem = new Gem(200, 200, 'blue');
+// var blueGem2 = new Gem(150, 400, 'blue2');
+// var allGems = [blueGem, blueGem2];
 // pause set to false on game start in reset in function
 let pause; 
 

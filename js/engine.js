@@ -95,6 +95,9 @@ var Engine = (function(global) {
             enemy.update(dt);
         });
         player.update();
+        // allGems.forEach(function(gem) {
+        //     gem.update();
+        // });
     }
 
     /* This function initially draws the "game level", it will then call
@@ -140,6 +143,7 @@ var Engine = (function(global) {
         }
 
         renderEntities();
+        // renderGems();
     }
 
     /* This function is called by the render function and is called on each game
@@ -157,6 +161,12 @@ var Engine = (function(global) {
         player.render();
     }
 
+    // function renderGems() {
+    //     allGems.forEach(function(gem){
+    //         gem.render();
+    //     })
+    // }
+
     /* This function does nothing but it could have been a good place to
      * handle game reset states - maybe a new game menu or a game over screen
      * those sorts of things. It's only called once by the init() method.
@@ -167,8 +177,10 @@ var Engine = (function(global) {
         enemyBug1 = new Enemy(0, 150, 100, "E1"); 
         enemyBug2 = new Enemy(0, 250, 150, "E2");
         enemyBug3 = new Enemy(0, 305, 75, "E3");
-
-        
+        // create and place gems
+        // blueGem = new Gem(200, 200, 'blue');
+        // blueGem2 = new Gem(150, 400, 'blue');
+        // allGems = [blueGem, blueGem2];
         // Place all enemy objects in an array called allEnemies
         allEnemies = [enemyBug1, enemyBug2, enemyBug3];
         player = new Player(); // global var
@@ -190,6 +202,7 @@ var Engine = (function(global) {
         'images/char-boy.png',
         'images/char-cat-girl.png',
         'images/char-cat-girl-damage.png'
+        // 'images/gem-blue.png'
     ]);
     Resources.onReady(init);
 
