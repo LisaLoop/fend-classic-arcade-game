@@ -56,6 +56,7 @@ var Engine = (function(global) {
          * function again as soon as the browser is able to draw another frame.
          */
         win.requestAnimationFrame(main);
+        // 
     }
 
     /* This function does some initial setup that should only occur once,
@@ -177,7 +178,7 @@ var Engine = (function(global) {
         enemyBug1 = new Enemy(0, 150, 100, "E1"); 
         enemyBug2 = new Enemy(0, 250, 150, "E2");
         enemyBug3 = new Enemy(0, 305, 75, "E3");
-        // create and place gems
+        // create and place gems x, y, name
         // blueGem = new Gem(200, 200, 'blue');
         // blueGem2 = new Gem(150, 400, 'blue');
         // allGems = [blueGem, blueGem2];

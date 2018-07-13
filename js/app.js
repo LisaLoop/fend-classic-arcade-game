@@ -95,9 +95,9 @@ Player.prototype.update = function(dt) {
     // all computers.
     // console.log("function called");
     for(let i = 0; i < allEnemies.length; i += 1) {
-        player.handleCollision(allEnemies[i]);
+        this.handleCollision(allEnemies[i]);
         //console.log(allEnemies[i].name);
-        if (player.damaged) {
+        if (this.damaged) {
             return;
         }
             
@@ -136,18 +136,18 @@ Player.prototype.handleCollision = function(enemy) {
       let isTakingDamage = rectOverlap(player, enemy) || rectOverlap(enemy, player); 
       if (isTakingDamage){
         //   console.log(enemy.name);
-          player.sprite = 'images/char-cat-girl-damage.png';
-          player.damaged = true;
-          player.health -= 1;
+          this.sprite = 'images/char-cat-girl-damage.png';
+          this.damaged = true;
+          this.health -= 1;
         //   console.log(player.health);
-          if (player.health < 0) {
+          if (this.health < 0) {
             //   console.log("game over");
               reset();
           }
           
       } else {
-          player.sprite = 'images/char-cat-girl.png';
-          player.damaged = false;
+          this.sprite = 'images/char-cat-girl.png';
+          this.damaged = false;
       }
       
 }
@@ -178,8 +178,11 @@ Player.prototype.render = function() {
         ctx.font = '50px monospace';
         ctx.fontStyle = "rgb(24, 24, 104)";
         ctx.fillStyle = "rgb(0, 0 ,0)";
-        ctx.fillText("You won", 150, 150); // text written to screen
-        setTimeout( function(){reset();}, 2500);
+        ctx.fillText("You won", 150, 250); // text written to screen
+        pause = true;
+        setTimeout( function(){
+            pause = true;
+            reset();}, 2500);
     }
 
 };
@@ -252,7 +255,7 @@ let pause;
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
-document.addEventListener('keyup', function(e) {
+document.addEventListener('keydown', function(e) {
     var allowedKeys = {
         32: 'pause', //spacebar
         37: 'left',
